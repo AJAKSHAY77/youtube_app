@@ -1,5 +1,6 @@
 import React from 'react'
-import {useSelector } from 'react-redux/es/hooks/useSelector';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { Link } from 'react-router-dom';
 
 
 
@@ -12,7 +13,9 @@ const Sidebar = () => {
   return (
     <div className="p-3 shadow-lg w-48">
       <ul className="font-medium">
-        <li>Home</li>
+        <li>
+          <Link to={"/"}>Home</Link>
+        </li>
         <li>Shorts</li>
         <li>Videos</li>
         <li>Live</li>
