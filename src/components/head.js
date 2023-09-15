@@ -1,17 +1,38 @@
-import React from 'react'
-import { useDispatch } from 'react-redux';
-import { toggglemenu } from '../utils/appslice';
-
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { toggglemenu } from "../utils/appslice";
+import { YOUTUBE_SEARCH_API } from "../utils/constant";
 
 const Head = () => {
-   const disptch = useDispatch();
+  const [searchQuery, setsearchQuery] = useState("");
+  const [suggestion, setsuggestion] = useState([]);
+  const[showsuggestion,setshowsuggestion] = useState(false)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      datasearchquery();
+    }, 200);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [searchQuery]);
+
+  const datasearchquery = async () => {
+    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const json = await data.json();
+     setsuggestion(json[1])
+  };
+  const disptch = useDispatch();
 
   const togglemenuhandler = () => {
-        disptch(toggglemenu())
-  }
+    disptch(toggglemenu());
+  };
   return (
     <div className="grid grid-flow-col p-5 m-2  shadow-lg">
-      <div className=" cursor-pointer flex gap-7 col-span-1" onClick={()=>togglemenuhandler()}>
+      <div
+        className=" cursor-pointer flex gap-7 col-span-1"
+        onClick={() => togglemenuhandler()}
+      >
         <img
           className="h-10"
           alt="menu"
@@ -26,14 +47,36 @@ const Head = () => {
       </div>
 
       <div className="col-span-10">
-        <input
-          type="text"
-          className="text-center w-1/2 ml-30 border py-1 border-gray-400 rounded-l-full"
-        />
-        <button className=" border py-1 px-1  border-gray-400 rounded-r-full bg-gray-100">
-          🔍
-        </button>
-      </div> 
+        <div>
+          <input
+            type="text"
+            className=" px-14 text-left w-1/2 ml-30 border py-1 border-gray-400 rounded-l-full"
+            value={searchQuery}
+            onChange={(e) => {
+              setsearchQuery(e.target.value);
+              
+            }}
+            onFocus={() =>setshowsuggestion(true)}
+            onBlur={() => setshowsuggestion(false)}
+          
+            
+          />
+          <button className=" border py-1 px-1  border-gray-400 rounded-r-full bg-gray-100">
+            🔍
+          </button>
+        </div>
+
+        {showsuggestion&&<div className="fixed bg-white py-2 px-3 w-[33.3rem] shadow-lg shadow-slate-500 rounded-lg border-gray-500">
+          <ul>
+            {showsuggestion && suggestion.map((s) => (
+              <li key={s} className="py-2 px-2 shadow-sm hover:bg-gray-100">
+                🔍{s}
+              </li>
+            ))}
+          </ul>
+        </div>}
+      </div>
+
       <div className="w-6 col-span-1">
         <img
           alt="user"
@@ -42,7 +85,6 @@ const Head = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Head;
- 
