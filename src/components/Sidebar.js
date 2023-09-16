@@ -11,8 +11,8 @@ const Sidebar = () => {
   if (!isMenuOpen) return null;
   
   return (
-    <div className="p-3 shadow-lg w-48">
-      <ul className="font-medium">
+    <div className="p-3 pr-14 shadow-lg">
+      <ul className="font-medium"> 
         <li>
           <Link to={"/"}>Home</Link>
         </li>
