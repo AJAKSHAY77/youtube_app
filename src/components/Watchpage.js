@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { closemenu } from '../utils/appslice'
 import { useSearchParams } from 'react-router-dom'
 import Commentcontainer from './Commentcontainer'
-
+import Livechat from "./Sidebarleft";
 const Watchpage = () => {
     const [searchparam] = useSearchParams()
     console.log(searchparam.get("v"));
@@ -12,10 +12,11 @@ const Watchpage = () => {
         dispatch(closemenu())
     },[])
   return (
-    <div>
-      <div className="px-5">
+    <div className="flex w-full pt-4">
+      <div className="px-3">
         <iframe
-          width="1100"
+          className="rounded-lg"
+          width="1000"
           height="600"
           src={"https://www.youtube.com/embed/" + searchparam.get("v")}
           title="YouTube video player"
@@ -23,12 +24,15 @@ const Watchpage = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         ></iframe>
+
+        <div className="ml-8 p-4 h-64">
+          <Commentcontainer />
+        </div>
       </div>
 
-      <div className='ml-8 p-4 h-64' >
-        <Commentcontainer/>
+      <div className="w-full h-[600px] bg-gray-50 border border-gray-300 rounded-lg m-1 overflow-y-scroll">
+        <Livechat/>
       </div>
-
     </div>
   );
 }
