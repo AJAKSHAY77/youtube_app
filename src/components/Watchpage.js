@@ -30,7 +30,7 @@ const Watchpage = () => {
         </div>
       </div>
 
-      <div className="w-full h-[600px] bg-gray-50 border border-gray-300 rounded-lg m-1 overflow-y-scroll">
+      <div>
         <Livechat/>
       </div>
     </div>
