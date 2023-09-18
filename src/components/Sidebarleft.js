@@ -18,26 +18,28 @@ const Livechat = () => {
           message: randommessage(20)
         })
       );
-    }, 2000);
+    }, 500);
 
     return () => clearInterval(t);
   }, []);
 
   return (
-    <div>
-      <div>
-        <h1 className=" w-[406px] h-10 text-left pt-2 pl-3 bg-white rounded-t-lg">
+    <>
+      <h1 className=" w-[406px] h-10 text-left pt-2 pl-3 bg-black text-white rounded-t-lg">
         Top chat
       </h1>
-      </div>
 
-      <div className="flex flex-col-reverse">
+      <div className="w-full h-[550px] bg-gray-50 border border-gray-300 rounded-lg m-1 overflow-y-scroll  flex flex-col-reverse">
         {chatMessages.map((el, index) => (
           <Chatmessae key={index} name={el.name} message={el.message} />
         ))}
-  
       </div>
-    </div>
+
+      <div>
+        <input  type="text"/>
+      </div>
+
+    </>
   );
 };
 
