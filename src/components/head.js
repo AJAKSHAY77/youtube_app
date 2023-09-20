@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { toggglemenu } from "../utils/appslice";
 import { YOUTUBE_SEARCH_API } from "../utils/constant";
 import { Link } from "react-router-dom";
+import Demo from './Demo';
+import Button from './Button';
 
 
 const Head = () => {
@@ -79,12 +81,21 @@ const Head = () => {
         )}
       </div>
 
+    
+      <div>
+        {/* <Link to={"demo"}>demo</Link> */}
+       </div>
+        
+      
+
       <div className="w-6 col-span-1">
         <img
           alt="user"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgOm2LuId_WkIuaCpuGYldjjC1c_Zi134yRg&usqp=CAU"
         />
       </div>
+
+      
     </div>
   );
 };
